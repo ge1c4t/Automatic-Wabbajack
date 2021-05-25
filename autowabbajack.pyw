@@ -47,14 +47,14 @@ def autostuff():
         additionalbuttonloc = pyautogui.locateOnScreen('additional download.png', confidence = 0.9)
         slowbuttonloc = pyautogui.locateOnScreen('slow download.png', confidence = conf)
         backbuttonloc = pyautogui.locateOnScreen('back.png', confidence = conf)
-        printWindow("[" + str(timer) + "] Attempted Actions")
-        timer += 1
         if step == 0:
             printWindow('Locating manual download button...')
             if manualbuttonloc != None:
                 printWindow('Clicking manual download button!')
                 manualbuttonloc = pyautogui.center(manualbuttonloc)
                 pyautogui.click(manualbuttonloc.x, manualbuttonloc.y)
+                printWindow("[" + str(timer) + "] Attempted Mod Downloads")
+                timer += 1
                 step += 1
                 continue
             if manualbuttonloc == None:
@@ -77,12 +77,12 @@ def autostuff():
                 printWindow('Clicking slow download button!')
                 slowbuttonloc = pyautogui.center(slowbuttonloc)
                 pyautogui.click(slowbuttonloc.x, slowbuttonloc.y)
-                step += 1
                 time.sleep(6)
+                step += 1
                 continue
             if slowbuttonloc == None:
                 printWindow('Could not locate slow button.')
-            time.sleep(6)
+            time.sleep(2)
             step += 1
         if step == 3:
             if back:
@@ -98,7 +98,6 @@ def autostuff():
                 if backbuttonloc == None:
                     printWindow('Could not locate back button.')
             step = 0
-            timer += 1
 
 
 def main():
