@@ -3,12 +3,6 @@ An auto clicker for wabbajack modlist installation.
 
 NOTE: This program is against Nexus Mods' TOS, use at your own risk.
 
-Reqirements:  
-Python 3  
-pysimplegui  
-pyautogui  
-opencv  
-
 > ## Installation
 > 1. Install python 3.8: https://www.python.org/downloads/
 > 2. Open up command prompt and type `pip install pyautogui` then `pip install pysimplegui` and then `pip install opencv-python`
@@ -26,5 +20,7 @@ opencv
 > * This program will physically move your mouse and click the button, so don't expect to be able to use the computer during the process
 > 
 > Cheers,
+Instructions from @hexeth
+
 
 ![](Animation.gif)
