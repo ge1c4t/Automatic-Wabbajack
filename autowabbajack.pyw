@@ -3,26 +3,22 @@ import cv2 as cv
 import time
 import PySimpleGUI as sg
 from threading import Thread
-import threading
-import subprocess
 
-#step 0: manual download
-#step 1: additional download
-#step 2: slow download
-#step 3: back button
+#step 0: slow download
+#step 1: back button
 step = 0
 timer = 0
 conf = 0.8
 retry = False
 back = False
 running = False
-status = "Automatic Wabbajack v0.1"
+status = "Automatic Wabbajack v0.3"
 tag = "@ge1c4t"
 autoproc = None
 
-sg.theme('DarkPurple4')
+sg.theme('DarkGrey13')
 col = [
-    [sg.Multiline(size=(40,15), background_color='black', text_color='white', key='-TEXT-')]
+    [sg.Multiline(size=(40,15), key='-TEXT-')]
 ]
 layout = [
     [sg.Text(status, justification='left'), sg.Text(tag, justification='right')],
@@ -39,58 +35,32 @@ def printWindow(string):
 
 def autostuff():
     global autoproc, running
-    add = 0
     while True and running:
         global step, timer
         time.sleep(3)
-        manualbuttonloc = pyautogui.locateOnScreen('manual.png', confidence = conf)
-        additionalbuttonloc = pyautogui.locateOnScreen('additional download.png', confidence = 0.9)
-        slowbuttonloc = pyautogui.locateOnScreen('slow download.png', confidence = conf)
-        backbuttonloc = pyautogui.locateOnScreen('back.png', confidence = conf)
+        slowbuttonloc = pyautogui.locateOnScreen('img/slow download.png', confidence = conf)
+        backbuttonloc = pyautogui.locateOnScreen('img/back.png', confidence = conf)
         if step == 0:
-            printWindow('Locating manual download button...')
-            if manualbuttonloc != None:
-                printWindow('Clicking manual download button!')
-                manualbuttonloc = pyautogui.center(manualbuttonloc)
-                pyautogui.click(manualbuttonloc.x, manualbuttonloc.y)
-                printWindow("[" + str(timer) + "] Attempted Mod Downloads")
-                timer += 1
-                step += 1
-                continue
-            if manualbuttonloc == None:
-                printWindow('Could not locate manual download button.')
-            step += 1
-        if step == 1:
-            printWindow('Locating additional download button...')
-            if additionalbuttonloc != None:
-                printWindow('Clicking additional download button!')
-                additionalbuttonloc = pyautogui.center(additionalbuttonloc)
-                pyautogui.click(additionalbuttonloc.x, additionalbuttonloc.y)
-                step += 1
-                continue
-            if additionalbuttonloc == None:
-                printWindow('Could not locate additional download button.')
-            step += 1
-        if step == 2:
             printWindow('Locating slow download button...')
             if slowbuttonloc != None:
                 printWindow('Clicking slow download button!')
                 slowbuttonloc = pyautogui.center(slowbuttonloc)
                 pyautogui.click(slowbuttonloc.x, slowbuttonloc.y)
-                time.sleep(6)
+                time.sleep(1)
+                #For disabling button hover
+                pyautogui.moveTo(10, 10)
                 step += 1
                 continue
             if slowbuttonloc == None:
                 printWindow('Could not locate slow button.')
-            time.sleep(2)
             step += 1
-        if step == 3:
+        if step == 1:
             if back:
                 if retry == False:
                     retry = True
                     continue
                 printWindow('Locating back button...')
-                if backbuttonloc != None and manualbuttonloc == None and additionalbuttonloc == None and slowbuttonloc == None and retry:
+                if backbuttonloc != None and slowbuttonloc == None and retry:
                     printWindow('Clicking back button!')
                     backbuttonloc = pyautogui.center(backbuttonloc)
                     pyautogui.click(backbuttonloc.x, backbuttonloc.y)
