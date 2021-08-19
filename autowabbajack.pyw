@@ -7,8 +7,6 @@ from threading import Thread
 #step 0: slow download
 #step 1: back button
 step = 0
-timer = 0
-conf = 0.8
 retry = False
 back = False
 running = False
@@ -36,10 +34,10 @@ def printWindow(string):
 def autostuff():
     global autoproc, running
     while True and running:
-        global step, timer
+        global step
         time.sleep(3)
-        slowbuttonloc = pyautogui.locateOnScreen('img/slow download.png', confidence = conf)
-        backbuttonloc = pyautogui.locateOnScreen('img/back.png', confidence = conf)
+        slowbuttonloc = pyautogui.locateOnScreen('img/slow download.png', confidence = 0.8)
+        backbuttonloc = pyautogui.locateOnScreen('img/back.png', confidence = 0.8)
         if step == 0:
             printWindow('Locating slow download button...')
             if slowbuttonloc != None:
